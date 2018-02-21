@@ -5,23 +5,36 @@ let initialState = {
     comment: ''
 }
 
-const HOLD_PLACE = "HOLD_PLACE"
+const TYPING_USERNAME = "TYPING_USERNAME"
+const TYPING_PASSWORD = "TYPING_PASSWORD"
 
 function reducer(state = initialState, action) {
     switch(action.type) {
-    //     case HOLD_PLACE:
-    //         return Object.assign({}, state, action.payload)
+        case TYPING_USERNAME:
+            return Object.assign({}, state, {username: action.payload})
+        
+        case TYPING_PASSWORD:
+            return Object.assign({}, state, {password: action.payload})
 
     default: return state
     }
 }
 
-// export function placeholder(p) {
-//     return {
-//         type: HOLD_PLACE,
-//         payload: p
-//     }
-// }
+export function typingUsername(username) {
+    return {
+        type: TYPING_USERNAME,
+        payload: username
+    }
+}
+
+export function typingPassword(password) {
+    return {
+        type: TYPING_PASSWORD,
+        payload: password
+    }
+}
+
+
 
 
 export default reducer
