@@ -6,8 +6,12 @@ let initialState = {
     question: '',
     answerA: '',
     answerB: '',
+    questionResult: '',
+    percentResult: '',
+    commentsResult: '',
+    comment: '',
     likes: 0,
-    comment: ''
+    
 }
 
 const TYPING_USERNAME = "TYPING_USERNAME"
@@ -17,6 +21,11 @@ const TYPING_NEW_PASSWORD = "TYPING_NEW_PASSWORD"
 const READ_QUESTION = "READ_QUESTION"
 const READ_ANSWER_A = "READ_ANSWER_A"
 const READ_ANSWER_B = "READ_ANSWER_B"
+const READ_QUESTION_RESULT = "READ_QUESTION_RESULT"
+const READ_PERCENT_RESULT = "READ_PERCENT_RESULT"
+const READ_COMMENTS_RESULT = "READ_COMMENTS_RESULT"
+const TYPING_COMMENT = "TYPING_COMMENT"
+
 
 function reducer(state = initialState, action) {
     switch(action.type) {
@@ -40,6 +49,18 @@ function reducer(state = initialState, action) {
         
         case READ_ANSWER_B:
             return Object.assign({}, state, {answerB: action.payload})
+
+        case READ_QUESTION_RESULT:
+            return Object.assign({}, state, {questionResult: action.payload})
+
+        case READ_PERCENT_RESULT:
+            return Object.assign({}, state, {percentResult: action.payload})
+
+        case READ_COMMENTS_RESULT:
+            return Object.assign({}, state, {commentsResult: action.payload})
+
+        case TYPING_COMMENT:
+            return Object.assign({}, state, {comment: action.payload})
 
     default: return state
     }
@@ -97,6 +118,34 @@ export function readAnswerB(ansB) {
 }
 
 //----------------------------------------------------------------
+
+export function readQuestionResult(q){
+    return {
+        type: READ_QUESTION_RESULT,
+        payload: q
+    }
+}
+
+export function readPercentResult(p) {
+    return {
+    type: READ_PERCENT_RESULT,
+    payload: p
+    }
+}
+
+export function readCommentsResult(c) {
+    return {
+        type: READ_COMMENTS_RESULT,
+        payload: c
+    }
+}
+
+export function typingComment(c) {
+    return {
+        type: TYPING_COMMENT,
+        payload: c
+    }
+}
 
 
 export default reducer
