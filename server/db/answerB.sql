@@ -1,0 +1,1 @@
+update question set ansb = ansb+1 where id = $1
