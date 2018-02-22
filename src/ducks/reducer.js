@@ -25,6 +25,7 @@ const READ_QUESTION_RESULT = "READ_QUESTION_RESULT"
 const READ_PERCENT_RESULT = "READ_PERCENT_RESULT"
 const READ_COMMENTS_RESULT = "READ_COMMENTS_RESULT"
 const TYPING_COMMENT = "TYPING_COMMENT"
+const DELETE_COMMENT = "DELETE_COMMENT"
 
 
 function reducer(state = initialState, action) {
@@ -60,6 +61,9 @@ function reducer(state = initialState, action) {
             return Object.assign({}, state, {commentsResult: action.payload})
 
         case TYPING_COMMENT:
+            return Object.assign({}, state, {comment: action.payload})
+
+        case DELETE_COMMENT:
             return Object.assign({}, state, {comment: action.payload})
 
     default: return state

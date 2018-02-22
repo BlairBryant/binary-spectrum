@@ -24,8 +24,8 @@ class QA extends Component {
 
                 <section className="answersHolder">
                 {/* Change links below */}
-                    <Link to='/Result/a'><div className="ansButton">Ans A</div></Link>
-                    <Link to='/Result/b'><div className="ansButton">Ans B</div></Link>
+                    <Link to='/Result/1'><div className="ansButton">Ans A</div></Link>
+                    <Link to='/Result/1'><div className="ansButton">Ans B</div></Link>
                 </section>
 
             </div>

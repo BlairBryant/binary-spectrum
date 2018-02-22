@@ -26,6 +26,7 @@ class Result extends Component {
     // deleteComment() {
     //     axios.delete().then(res => {
     //         console.log("has deleted")
+    //         readCommentsResult(res.data)
     //     })
     // }
 
