@@ -1,6 +1,4 @@
 let initialState = {
-    username: '',
-    password: '',
     question: '',
     answerA: '',
     answerB: '',
@@ -12,8 +10,6 @@ let initialState = {
     
 }
 
-const TYPING_USERNAME = "TYPING_USERNAME"
-const TYPING_PASSWORD = "TYPING_PASSWORD"
 const READ_QUESTION = "READ_QUESTION"
 const READ_ANSWER_A = "READ_ANSWER_A"
 const READ_ANSWER_B = "READ_ANSWER_B"
@@ -26,13 +22,6 @@ const DELETE_COMMENT = "DELETE_COMMENT"
 
 function reducer(state = initialState, action) {
     switch(action.type) {
-        case TYPING_USERNAME:
-            return Object.assign({}, state, {username: action.payload})
-        
-        case TYPING_PASSWORD:
-            return Object.assign({}, state, {password: action.payload})
-
-
         case READ_QUESTION:
             return Object.assign({}, state, {question: action.payload})
 
@@ -61,22 +50,6 @@ function reducer(state = initialState, action) {
     }
 }
 
-export function typingUsername(username) {
-    return {
-        type: TYPING_USERNAME,
-        payload: username
-    }
-}
-
-export function typingPassword(password) {
-    return {
-        type: TYPING_PASSWORD,
-        payload: password
-    }
-}
-
-
-//--------------------------------------------------------------
 
 export function readQuestion(q) {
     return {
