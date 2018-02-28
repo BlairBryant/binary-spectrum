@@ -1,8 +1,6 @@
 let initialState = {
     username: '',
     password: '',
-    newUsername: '',
-    newPassword: '',
     question: '',
     answerA: '',
     answerB: '',
@@ -16,8 +14,6 @@ let initialState = {
 
 const TYPING_USERNAME = "TYPING_USERNAME"
 const TYPING_PASSWORD = "TYPING_PASSWORD"
-const TYPING_NEW_USERNAME = "TYPING_NEW_USERNAME"
-const TYPING_NEW_PASSWORD = "TYPING_NEW_PASSWORD"
 const READ_QUESTION = "READ_QUESTION"
 const READ_ANSWER_A = "READ_ANSWER_A"
 const READ_ANSWER_B = "READ_ANSWER_B"
@@ -36,11 +32,6 @@ function reducer(state = initialState, action) {
         case TYPING_PASSWORD:
             return Object.assign({}, state, {password: action.payload})
 
-        case TYPING_NEW_USERNAME:
-            return Object.assign({}, state, {newUsername: action.payload})
-
-        case TYPING_NEW_PASSWORD:
-            return Object.assign({}, state, {newPassword: action.payload})
 
         case READ_QUESTION:
             return Object.assign({}, state, {question: action.payload})
@@ -84,19 +75,6 @@ export function typingPassword(password) {
     }
 }
 
-export function typingNewUsername(newUsername) {
-    return {
-        type: TYPING_NEW_USERNAME,
-        payload: newUsername
-    }
-}
-
-export function typingNewPassword(newPassword) {
-    return {
-        type: TYPING_NEW_PASSWORD,
-        payload: newPassword
-    }
-}
 
 //--------------------------------------------------------------
 
