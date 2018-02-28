@@ -32,7 +32,7 @@ class Home extends Component {
                     <h3>Username</h3>
                     <input value={this.props.username} onChange={e => this.props.typingUsername(e.target.value)}/>
                     <h3>Password</h3>
-                    <input value={this.props.password} onChange={e => this.props.typingPassword(e.target.value)}/> <br /><br />
+                    <input value={this.props.password} onChange={e => this.props.typingPassword(e.target.value)} type="password"/> <br /><br />
                     {/* Set the to= below to have 1 entered dynamically as an ID */}
                     <Link to={'/QA/1'}><button>Log in</button></Link>
                 </div>
@@ -40,7 +40,7 @@ class Home extends Component {
                 <h3>newUsername</h3>
                 <input value={this.props.newUsername} onChange={e => this.props.typingNewUsername(e.target.value)}/> <br />
                 <h3>newPassword</h3>
-                <input value={this.props.newPassword} onChange={e => this.props.typingNewPassword(e.target.value)}/><br />
+                <input value={this.props.newPassword} onChange={e => this.props.typingNewPassword(e.target.value)} type="password"/><br />
                 <button>Sign Up</button>
 
             </div>

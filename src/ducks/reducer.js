@@ -151,5 +151,4 @@ export function typingComment(c) {
     }
 }
 
-
 export default reducer

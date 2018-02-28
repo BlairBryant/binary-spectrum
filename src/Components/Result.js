@@ -5,17 +5,19 @@ import {readQuestionResult, readPercentResult, readCommentsResult, typingComment
 
 class Result extends Component {
 
-    // componentDidMount() {
-    //     //get question
-    //     //get percent
-    //     axios.get().then(res => {
-    //         console.log(res.data)
-    //     })
-    //     //get comments
-    //     axios.get().then(res => {
-    //         console.log(res.data)
-    //     })
-    // }
+    componentDidMount() {
+        //get question
+        axios.get(`/Result/question/${this.props.match.params.id}`).then(res => {
+            this.props.readQuestionResult(res.data[0].question)
+        // get percent
+        axios.get(`/Result/percent/${this.props.match.params.id}`).then(res => {
+            console.log(res.data)
+        })
+        // //get comments
+        // axios.get().then(res => {
+        //     console.log(res.data)
+        })
+    }
 
     // postComment() {
     //     axios.put().then(res => {
@@ -35,7 +37,7 @@ class Result extends Component {
         console.log(this.props)
         return(
             <div className='result'>
-                <div className='qHolder'>Question Here</div>
+                <div className='qHolder'>{this.props.questionResult}</div>
                 <div className='percentDisplay'>Percent Display</div>
 
                 <section>Comments Holder <br /><br />

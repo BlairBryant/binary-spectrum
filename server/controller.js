@@ -17,41 +17,57 @@ module.exports = {
         db.register(newId, username, password).then(() => res.status(200).send());
         userId++
     },
-    getQuestions: (req, res, next) => {
+    getQuestion: (req, res, next) => {
         const db = req.app.get('db');
 
-    
         const{params} = req;
-        db.getQuestions([params.id]).then(questions => res.status(200).send(questions));
+        db.getQuestion(params.id).then(questions => res.status(200).send(questions))
+        .catch(() => res.status(500).send())
     },
     answerA: (req, res, next) => {
         const db = req.app.get('db');
 
         const{body} = req;
-        db.answerA(body.id).then(() => res.status(200).send());
+        db.answerA(body.id).then(() => res.status(200).send())
+        .catch(() => res.status(500).send())
     },
     answerB: (req, res, next) => {
         const db = req.app.get('db');
 
         const{body} = req;
-        db.answerB(body.id).then(() => res.status(200).send());
+        db.answerB(body.id).then(() => res.status(200).send())
+        .catch(() => res.status(500).send())
+    },
+    resultGetQuestion: (req, res, next) => {
+        const db = req.app.get('db');
+
+        db.getQuestion(req.params.id.charAt(0)).then(questions => res.status(200).send(questions))
+        .catch(() => res.status(500).send())
+    },
+    resultGetPercent: (req, res, next) => {
+        const db = req.app.get('db')
+
+        db.resultGetPercent(req.params.id.charAt(0)).then(AandB => res.status(200).send(AandB))
     },
     getComments: (req, res, next) => {
         const db = req.app.get('db');
 
         db.getComments().then(comments => res.status(200).send(comments))
+        .catch(() => res.status(500).send())
     },
     deleteComment: (req, res, next) => {
         const db = req.app.get('db');
         const{params} = req;
         db.deleteComment(params.id).then(comments => res.status(200).send(comments))
+        .catch(() => res.status(500).send())
     },
     addComment: (req, res, next) => {
     const db = req.app.get('db');
 
     const newId = commentId
     const{username, comment, voted} = req.body;
-    db.addComment(newId, username, comment, voted).then(() => res.status(200).send()) 
+    db.addComment(newId, username, comment, voted).then(() => res.status(200).send())
+    .catch(() => res.status(500).send())
     commentId++
     }
 
