@@ -4,10 +4,12 @@ import {Link} from 'react-router-dom'
 class Header extends Component {
     render() {
         return(
-            <Link to='/'><div className='header'>
-                Binary Spectrum
+            <div className='header'>
+                <Link to='/'><div>
+                    Binary Spectrum
+                </div>
+                </Link>
             </div>
-            </Link>
         )
     }
 }
