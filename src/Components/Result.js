@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {readQuestionResult, readPercentResult, readCommentsResult, typingComment} from '../ducks/reducer'
+import {readQuestionResult, readPercent, readComments, typingComment} from '../ducks/reducer'
 
 class Result extends Component {
 
@@ -58,4 +58,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {readQuestionResult, readPercentResult, readCommentsResult, typingComment})(Result)
+export default connect(mapStateToProps, {readQuestionResult, readPercent, readComments, typingComment})(Result)

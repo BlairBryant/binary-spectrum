@@ -6,18 +6,15 @@ let initialState = {
     percentResult: '',
     commentsResult: '',
     comment: '',
-    likes: 0,
-    
 }
 
 const READ_QUESTION = "READ_QUESTION"
 const READ_ANSWER_A = "READ_ANSWER_A"
 const READ_ANSWER_B = "READ_ANSWER_B"
 const READ_QUESTION_RESULT = "READ_QUESTION_RESULT"
-const READ_PERCENT_RESULT = "READ_PERCENT_RESULT"
-const READ_COMMENTS_RESULT = "READ_COMMENTS_RESULT"
+const READ_PERCENT = "READ_PERCENT"
+const READ_COMMENTS = "READ_COMMENTS"
 const TYPING_COMMENT = "TYPING_COMMENT"
-const DELETE_COMMENT = "DELETE_COMMENT"
 
 
 function reducer(state = initialState, action) {
@@ -34,16 +31,13 @@ function reducer(state = initialState, action) {
         case READ_QUESTION_RESULT:
             return Object.assign({}, state, {questionResult: action.payload})
 
-        case READ_PERCENT_RESULT:
+        case READ_PERCENT:
             return Object.assign({}, state, {percentResult: action.payload})
 
-        case READ_COMMENTS_RESULT:
+        case READ_COMMENTS:
             return Object.assign({}, state, {commentsResult: action.payload})
 
         case TYPING_COMMENT:
-            return Object.assign({}, state, {comment: action.payload})
-
-        case DELETE_COMMENT:
             return Object.assign({}, state, {comment: action.payload})
 
     default: return state
@@ -81,16 +75,16 @@ export function readQuestionResult(q){
     }
 }
 
-export function readPercentResult(p) {
+export function readPercent(p) {
     return {
-    type: READ_PERCENT_RESULT,
+    type: READ_PERCENT,
     payload: p
     }
 }
 
-export function readCommentsResult(c) {
+export function readComments(c) {
     return {
-        type: READ_COMMENTS_RESULT,
+        type: READ_COMMENTS,
         payload: c
     }
 }

@@ -35,7 +35,6 @@ app.use(checkForSession)
 
 app.use(passport.initialize())
 app.use(passport.session())
-
 passport.use(new Auth0Strategy({
     domain: DOMAIN,
     clientID: CLIENT_ID,
@@ -56,20 +55,17 @@ passport.deserializeUser(function (profile, done) {
 app.get('/auth', passport.authenticate('auth0'))
 app.get('/auth/callback', passport.authenticate('auth0', {
     //type endpoint in after 3000/ 
-    successRedirect: `http://localhost:3000/#/QA/${currentDay}`
+    // successRedirect: `http://localhost:3000/#/QA/${currentDay}`
+    successRedirect: `http://192.168.1.81:3000/#/QA/${currentDay}`
 }))
 
 
-
-app.post('/login', ctrl.login) //if they do not have a matching username and password in the db, it will return an empty array.
-app.post('/register', ctrl.register)
 app.get('/QA/:id', ctrl.getQuestion)
-app.put('/QA/A', ctrl.answerA)
-app.put('/QA/B', ctrl.answerB)
+app.put('/QA/A', ctrl.aVote)
+app.put('/QA/B', ctrl.bVote)
 app.get('/Result/question/:id', ctrl.resultGetQuestion)
-app.get('/Result/percent/:id', ctrl.resultGetPercent)
+app.get('/Result/percent/:id', ctrl.getPercent)
 app.get('/Result/comments/:id', ctrl.getComments)
-app.delete('/Result/delete/:id', ctrl.deleteComment)
 app.post('/Result/postComment/:id', ctrl.addComment)
 
 
