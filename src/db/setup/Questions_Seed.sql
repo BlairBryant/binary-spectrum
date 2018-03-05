@@ -4,3 +4,9 @@ CREATE TABLE questions (
     answerA TEXT,
     answerB TEXT
 )
+
+INSERT INTO questions (question, answerA, answerB)
+VALUES ('Is it easier to take 1 to 1000 or to take 0 to 1?',
+'1 to 1000',
+'0 to 1'
+)

@@ -4,6 +4,8 @@ CREATE TABLE COMMENTS (
     REFERENCES questions(question_id),
     user_id INTEGER
     REFERENCES users(user_id),
-    timestamp TEXT,
     comment VARCHAR(500)
 )
+
+INSERT INTO comments (question_id, user_id, comment)
+VALUES (1, 1, 'I think 0 to 1 is harder just because')

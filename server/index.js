@@ -54,8 +54,6 @@ passport.deserializeUser(function (profile, done) {
 
 app.get('/auth', passport.authenticate('auth0'))
 app.get('/auth/callback', passport.authenticate('auth0', {
-    //type endpoint in after 3000/ 
-    // successRedirect: `http://localhost:3000/#/QA/${currentDay}`
     successRedirect: `http://192.168.1.81:3000/#/QA/${currentDay}`
 }))
 

@@ -7,3 +7,6 @@ CREATE TABLE Votes (
     a_vote INTEGER,
     b_vote INTEGER
 )
+
+INSERT INTO votes (question_id, user_id, a_vote, b_vote)
+VALUES (1, 1, 1, null)
