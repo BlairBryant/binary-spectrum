@@ -82,7 +82,7 @@ app.get('/QA', ctrl.getQuestion)
 app.put('/QA/A', ctrl.aVote)
 app.put('/QA/B', ctrl.bVote)
 app.get('/result/percent/:id', ctrl.getPercent)
-// app.get('/Result/comments/:id', ctrl.getComments)
+app.get('/result/comments/:id', ctrl.getComments)
 // app.post('/Result/postComment/:id', ctrl.addComment)
 
 

@@ -4,7 +4,7 @@ let initialState = {
     answerB: '',
     questionResult: '',
     percentResult: '',
-    commentsResult: '',
+    commentsResult: [],
     comment: '',
 }
 

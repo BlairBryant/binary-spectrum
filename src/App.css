@@ -98,8 +98,30 @@ a {
 }
 
 .commentsHolder {
-  width: 70%;
+  width: 80%;
   min-height: 180px;
   background: #E8DAB2;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding-bottom: 10px
+}
+
+textarea {
+  border: none;
+  outline: none;
+  font-family: 'Oxygen', sans-serif;
+  margin-bottom: 10px;
+}
+
+/* ----------------------------------------------- */
+
+.comment {
+  width: 80%;
+  height: 40px;
+  background: lightblue;
+  margin: 5px;
+  border-radius: 8px;
 }

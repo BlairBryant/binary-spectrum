@@ -35,7 +35,7 @@ module.exports = {
     getComments: (req, res) => {
         const db = req.app.get('db');
 
-        db.getComments().then(comments => res.status(200).send(comments))
+        db.getComments([req.params.id]).then(comments => res.status(200).send(comments))
         .catch(() => res.status(500).send())
     },
     addComment: (req, res) => {
