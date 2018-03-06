@@ -15,13 +15,11 @@ class QA extends Component {
             questionId: -1
         }
         //this might break things. But should be speedier than componentWillMount or didMount.
-        
-
+       
     }
-
     componentWillMount() {
         axios.get(`/QA/usercheck`).then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             if(res.data.length) {
                 if(res.data[0].a_vote) {
                     this.setState({resultEndpoint: 'A', redirect: true})
@@ -32,10 +30,7 @@ class QA extends Component {
             }
         })
     }
-
     componentDidMount() {
-        
-
         axios.get(`/QA`).then(res => {
             // console.log(res.data)
             this.props.readQuestion(res.data[0].question)
@@ -44,7 +39,6 @@ class QA extends Component {
             this.setState({questionId: res.data[0].question_id})
         })
     }
-
     postAnswer(aorb) {
         axios.put(`/QA/${aorb}`, {questionId: this.state.questionId}).then(res => {
             console.log('Passed a 1 into ', aorb)

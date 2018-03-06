@@ -24,20 +24,13 @@ module.exports = {
     bVote: (req, res) => {
         const db = req.app.get('db');
 
-        const{body} = req;
-        db.bVote([req.body.id, req.user.user_id]).then(() => res.status(200).send())
-        .catch(() => res.status(500).send())
-    },
-    resultGetQuestion: (req, res) => {
-        const db = req.app.get('db');
-
-        db.getQuestion(req.params.id.charAt(0)).then(questions => res.status(200).send(questions))
+        db.bVote([req.body.questionId, req.user.user_id]).then(() => res.status(200).send())
         .catch(() => res.status(500).send())
     },
     getPercent: (req, res) => {
         const db = req.app.get('db')
 
-        db.getPercent(req.params.id.charAt(0)).then(AandB => res.status(200).send(AandB))
+        db.getPercent([req.params.id]).then(AandB => res.status(200).send(AandB))
     },
     getComments: (req, res) => {
         const db = req.app.get('db');
