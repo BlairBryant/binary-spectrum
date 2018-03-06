@@ -15,6 +15,11 @@ class QA extends Component {
             questionId: -1
         }
         //this might break things. But should be speedier than componentWillMount or didMount.
+        
+
+    }
+
+    componentWillMount() {
         axios.get(`/QA/usercheck`).then(res => {
             console.log(res.data)
             if(res.data.length) {
@@ -26,7 +31,6 @@ class QA extends Component {
                 }
             }
         })
-
     }
 
     componentDidMount() {
@@ -51,20 +55,18 @@ class QA extends Component {
     render() {
         // console.log(this.props)
         if(this.state.redirect) {
-            return <Redirect to={`/Result/${this.props.match.params.id}${this.state.resultEndpoint}`} />
+            return <Redirect to={`/Result/${this.state.resultEndpoint}`} />
         }
         return(
             <div className="QA">
                 <div className="questionHolder">
                     {this.props.question}
                 </div>
-
                 <section className="answersHolder">
                 {/* Change links below */}
-                    <Link to='/Result/1A'><div className="ansButton" onClick={() => this.postAnswer('A')}>{this.props.answerA}</div></Link>
-                    <Link to='/Result/1B'><div className="ansButton" onClick={() => this.postAnswer('B')}>{this.props.answerB}</div></Link>
+                    <Link to='/Result/A'><div className="ansButton" onClick={() => this.postAnswer('A')}>{this.props.answerA}</div></Link>
+                    <Link to='/Result/B'><div className="ansButton" onClick={() => this.postAnswer('B')}>{this.props.answerB}</div></Link>
                 </section>
-
             </div>
         )
     }

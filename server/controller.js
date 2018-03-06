@@ -5,14 +5,13 @@ module.exports = {
         db.userCheck([req.user.user_id]).then(vote => res.status(200).send(vote))
         .catch(() => res.status(500).send())
     },
-
     getQuestion: (req, res) => {
         const db = req.app.get('db');
         let date = new Date(Date.now())
         let today = date.getDate()
         let month = date.getMonth()
-        let year = date.getFullYear() 
-        console.log(year, month, today)
+        let year = date.getFullYear()
+        // console.log(year, month, today)
         db.getQuestion([year, month, today]).then(question => res.status(200).send(question))
         .catch(() => res.status(500).send())
     },

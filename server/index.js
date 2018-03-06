@@ -9,8 +9,6 @@ const Auth0Strategy = require('passport-auth0')
 const checkForSession = require('./middleware/checkForSession')
 require('dotenv').config()
 
-var currentDay=1
-
 const {
     SERVER_PORT,
     SESSION_SECRET,
