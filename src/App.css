@@ -37,8 +37,6 @@ a {
   z-index: 3;
 }
 
-
-
 /* ----------------------------------------------- */
 
 .QA {
@@ -48,23 +46,25 @@ a {
 }
 
 .questionHolder {
-  width: 70%;
-  height: 30vh;
+  width: 80%;
+  height: 60vh;
   background: #E8DAB2;
   margin: 40px;
+  border-radius: 10px;
 }
 
 .answersHolder {
-  width: 70%;
-  height: 20vw;
+  width: 80%;
+  /* height: 20vh; */
   display: flex;
   justify-content: space-between
 }
 
 .ansButton {
-  width: 50px;
+  width: 140px;
   height: 120px;
   background: #E8DAB2;
+  border-radius: 10px;
 }
 
 

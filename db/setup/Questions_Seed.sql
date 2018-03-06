@@ -2,7 +2,10 @@ CREATE TABLE questions (
     question_id SERIAL PRIMARY KEY,
     question TEXT,
     answerA TEXT,
-    answerB TEXT
+    answerB TEXT,
+    year TEXT,
+    month TEXT,
+    today TEXT
 )
 
 INSERT INTO questions (question, answerA, answerB)
