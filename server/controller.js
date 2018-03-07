@@ -38,12 +38,27 @@ module.exports = {
         db.getComments([req.params.id]).then(comments => res.status(200).send(comments))
         .catch(() => res.status(500).send())
     },
+    getSessionUser: (req, res) => {
+        res.status(200).send(req.user)
+    },
     addComment: (req, res) => {
         const db = req.app.get('db');
 
         db.addComment().then(comments => res.status(200).send(comments))
         .catch(() => res.status(500).send())
     },
+    editComment: (req, res) => {
+        const db = req.app.get('db')
+
+        db.editComment([req.body.editComment, req.body.comment_id]).then(() => res.status(200).send())
+        .catch(() => res.status(500).send())
+    },
+    deleteComment: (req, res) => {
+        const db = req.app.get('db')
+
+        db.deleteComment([req.body.comment_id]).then(() => res.status(200).send())
+        .catch(() => res.status(500).send())
+    }
 
 
 }

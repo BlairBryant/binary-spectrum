@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import Comment from './Comment'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {readQuestionResult, readPercent, readComments, typingComment} from '../ducks/reducer'
+import {readQuestionResult, readPercent, readComments, typingComment, readUserSession} from '../ducks/reducer'
 
 
 class Result extends Component {
@@ -34,9 +34,13 @@ class Result extends Component {
             })
             // get comments
             axios.get(`/result/comments/${this.state.questionId}`).then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 this.props.readComments(res.data)
-                console.log('this.props.commentsResult = ', this.props.commentsResult)
+                // console.log('this.props.commentsResult = ', this.props.commentsResult)
+            })
+            axios.get(`/getSessionUser`).then(res => {
+                // console.log('session user info: ', res.data)
+                this.props.readUserSession(res.data)
             })
         })
         
@@ -80,8 +84,9 @@ function mapStateToProps(state) {
         questionResult: state.questionResult,
         percentResult: state.percentResult,
         commentsResult: state.commentsResult,
+        userSession: state.userSession,
         comment: state.comment
     }
 }
 
-export default connect(mapStateToProps, {readQuestionResult, readPercent, readComments, typingComment})(Result)
+export default connect(mapStateToProps, {readQuestionResult, readPercent, readComments, typingComment, readUserSession})(Result)

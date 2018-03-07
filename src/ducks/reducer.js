@@ -5,6 +5,7 @@ let initialState = {
     questionResult: '',
     percentResult: '',
     commentsResult: [],
+    userSession: {},
     comment: '',
 }
 
@@ -14,7 +15,9 @@ const READ_ANSWER_B = "READ_ANSWER_B"
 const READ_QUESTION_RESULT = "READ_QUESTION_RESULT"
 const READ_PERCENT = "READ_PERCENT"
 const READ_COMMENTS = "READ_COMMENTS"
+const READ_USER_SESSION = "READ_USER_SESSION"
 const TYPING_COMMENT = "TYPING_COMMENT"
+
 
 
 function reducer(state = initialState, action) {
@@ -37,8 +40,12 @@ function reducer(state = initialState, action) {
         case READ_COMMENTS:
             return Object.assign({}, state, {commentsResult: action.payload})
 
+        case READ_USER_SESSION:
+            return Object.assign({}, state, {userSession: action.payload})
+
         case TYPING_COMMENT:
             return Object.assign({}, state, {comment: action.payload})
+
 
     default: return state
     }
@@ -86,6 +93,13 @@ export function readComments(c) {
     return {
         type: READ_COMMENTS,
         payload: c
+    }
+}
+
+export function readUserSession(us) {
+    return {
+        type: READ_USER_SESSION,
+        payload: us
     }
 }
 

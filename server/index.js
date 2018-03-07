@@ -83,7 +83,10 @@ app.put('/QA/A', ctrl.aVote)
 app.put('/QA/B', ctrl.bVote)
 app.get('/result/percent/:id', ctrl.getPercent)
 app.get('/result/comments/:id', ctrl.getComments)
+app.get('/getSessionUser', ctrl.getSessionUser)
 // app.post('/Result/postComment/:id', ctrl.addComment)
+app.put('/api/result/editComment', ctrl.editComment)
+app.delete('/api/result/deleteComment', ctrl.deleteComment)
 
 
 app.listen(SERVER_PORT, () => console.log(`listening on port ${SERVER_PORT}`))

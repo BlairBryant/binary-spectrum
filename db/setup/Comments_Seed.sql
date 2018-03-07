@@ -13,4 +13,7 @@ INSERT INTO comments (question_id, user_id, comment, a, b)
 VALUES (1, 1, 'I think 0 to 1 is harder just because creation', 1, null)
 
 INSERT INTO comments (question_id, user_id, comment, a, b)
-VALUES (1, 2, 'I think 1 to 1000 is harder because optimization', null, 1)
+VALUES (1, 2, 'I think 1 to 1000 is harder because optimization', 1, null)
+
+INSERT INTO comments (question_id, user_id, comment, a, b)
+VALUES (1, 3, 'I think 1 to 1000 is harder because optimization', null, 1)
