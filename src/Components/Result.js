@@ -17,10 +17,8 @@ class Result extends Component {
     componentDidMount() {
         // get question
         axios.get(`/QA`).then(res => {
-            // console.log(res.data)
             this.setState({questionId: res.data[0].question_id})
             this.props.readQuestionResult(res.data[0].question)
-        
             // get percent
             axios.get(`/result/percent/${this.state.questionId}`).then(res => {
                 // console.log(res.data)
@@ -34,31 +32,22 @@ class Result extends Component {
             })
             // get comments
             axios.get(`/result/comments/${this.state.questionId}`).then(res => {
-                // console.log(res.data)
                 this.props.readComments(res.data)
-                // console.log('this.props.commentsResult = ', this.props.commentsResult)
             })
             axios.get(`/getSessionUser`).then(res => {
-                // console.log('session user info: ', res.data)
                 this.props.readUserSession(res.data)
             })
         })
-        
     }
 
-    // postComment() {
-    //     axios.put().then(res => {
-    //         console.log(res.data)
-    //     })
-    // }
-
-    // deleteComment() {
-    //     axios.delete().then(res => {
-    //         console.log("has deleted")
-    //         readCommentsResult(res.data)
-    //     })
-    // }
-
+    postComment(e) {
+        if (e.key === "Enter" && this.props.comment) {
+            axios.post('/api/result/postComment', {question_id: this.state.questionId, comment: this.props.comment, votedAorB: this.props.match.params.id}).then(res => {
+                this.props.readComments(res.data)
+                this.props.typingComment('')
+            })
+        }
+    }
 
     render() {
         // console.log(this.props)
@@ -71,7 +60,11 @@ class Result extends Component {
                 <div className='percentDisplay'>{`${this.props.percentResult}%`}</div>
 
                 <section className='commentsHolder'>Comments Holder <br /><br />
-                    <textarea value={this.props.comment} placeholder='Leave a comment' onChange={(e) => this.props.typingComment(e.target.value)}/>
+                    <textarea value={this.props.comment} 
+                              placeholder='Leave a comment' 
+                              onChange={(e) => this.props.typingComment(e.target.value)}
+                              onKeyPress={(e) => this.postComment(e)}
+                    />
                     {mappedComments}
                 </section>
             </div>

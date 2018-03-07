@@ -120,7 +120,7 @@ textarea {
 /* ----------------------------------------------- */
 
 .comment {
-  width: 78%;
+  width: 80%;
   min-height: 40px;
   background: lightblue;
   margin: 5px;
@@ -154,8 +154,20 @@ textarea {
   margin-left: 8px;
 }
 
+.commentOrTextarea {
+
+}
+
 .editingTextArea {
   width: 70%;
   height: 36px;
   margin: 0px;
+}
+
+.smiles {
+  display: flex;
+}
+
+.smiles div {
+  margin-right: 8px;
 }

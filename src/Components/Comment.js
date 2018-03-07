@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
-import {readComments} from '../ducks/reducer'
+import { readComments } from '../ducks/reducer'
 
 class Comment extends Component {
     constructor(props) {
@@ -16,33 +16,28 @@ class Comment extends Component {
     }
 
     componentDidMount() {
-        this.setState({editTheComment: this.props.commentObject.comment})
+        this.setState({ editTheComment: this.props.commentObject.comment })
     }
 
     setEditToggle() {
-        this.setState({editToggle: !this.state.editToggle})
-        if(this.state.editTheComment !== this.props.commentObject.comment){
-            axios.put('/api/result/editComment', {editComment: this.state.editTheComment, comment_id: this.props.commentObject.comment_id}).then(res => {
-                console.log('edit worked. I think. Here is new editTheCommentState: ', this.state.editTheComment)
-                console.log('this is res.data for edit: ', res.data)
+        this.setState({ editToggle: !this.state.editToggle })
+        if (this.state.editTheComment !== this.props.commentObject.comment) {
+            axios.put('/api/result/editComment', { editComment: this.state.editTheComment, comment_id: this.props.commentObject.comment_id, question_id: this.props.commentObject.question_id }).then(res => {
                 this.props.readComments(res.data)
             })
         }
     }
 
     deleteComment() {
-        axios.delete(`/api/result/deleteComment/${this.props.commentObject.comment_id}`).then(res => {
+        axios.put(`/api/result/deleteComment/${this.props.commentObject.comment_id}`, { question_id: this.props.commentObject.question_id }).then(res => {
             this.props.readComments(res.data)
         })
     }
 
     render() {
-        const { commentObject } = this.props
-        const { userSession } = this.props
+        const { commentObject, userSession } = this.props
         const { editToggle } = this.state
-        // console.log('this is commentObject ', commentObject)
-        // console.log(this.props)
-        // console.log('this is state: ', this.state)
+
         return (
             <div className='comment' id={commentObject.a ? 'commentA' : ''}>
                 <section className='commentOptionsWrapper'>
@@ -52,9 +47,9 @@ class Comment extends Component {
                             ?
                             <div className='buttonsHolder'>
                                 <div className='button'
-                                     id='editButton'
-                                     onClick={() => this.setEditToggle()}>
-                                     {editToggle ? 'Save' : 'Edit'}
+                                    id='editButton'
+                                    onClick={() => this.setEditToggle()}>
+                                    {editToggle ? 'Save' : 'Edit'}
                                 </div>
                                 <div className='button' id='deleteButton' onClick={() => this.deleteComment()}>Delete</div>
                             </div>
@@ -62,13 +57,21 @@ class Comment extends Component {
                             null
                     }
                 </section>
+                <section className='commentOrTextarea'>
                     {
-                        editToggle 
+                        editToggle
                             ?
-                            <textarea className='editingTextArea' value={this.state.editTheComment} onChange={(e) => this.setState({editTheComment: e.target.value})}/>
+                            <textarea className='editingTextArea' value={this.state.editTheComment} onChange={(e) => this.setState({ editTheComment: e.target.value })} />
                             :
-                            commentObject.comment
+                            <div className='commentDiv'>{commentObject.comment}</div>
                     }
+                </section>
+                <section className='smiles'>
+                    <div>:)</div>
+                    <div>7</div>
+                    <div>:(</div>
+                    <div>2</div>
+                </section>           
             </div>
         )
     }
@@ -81,4 +84,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {readComments})(Comment)
+export default connect(mapStateToProps, { readComments })(Comment)

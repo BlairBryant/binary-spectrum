@@ -43,20 +43,26 @@ module.exports = {
     },
     addComment: (req, res) => {
         const db = req.app.get('db');
-
-        db.addComment().then(comments => res.status(200).send(comments))
-        .catch(() => res.status(500).send())
+        const {question_id, comment, votedAorB} = req.body
+        const {user_id} = req.user
+        if(votedAorB === 'A') {
+            db.addComment([question_id , user_id, comment, 1, null]).then(comments => res.status(200).send(comments))
+            .catch(() => res.status(500).send())
+        } else {
+            db.addComment([question_id , user_id, comment, null, 1]).then(comments => res.status(200).send(comments))
+            .catch(() => res.status(500).send())
+        }
     },
     editComment: (req, res) => {
         const db = req.app.get('db')
 
-        db.editComment([req.body.editComment, req.body.comment_id]).then(() => res.status(200).send())
+        db.editComment([req.body.editComment, req.body.comment_id, req.body.question_id]).then((comments) => res.status(200).send(comments))
         .catch(() => res.status(500).send())
     },
     deleteComment: (req, res) => {
         const db = req.app.get('db')
 
-        db.deleteComment([req.params.id]).then((comments) => res.status(200).send(comments))
+        db.deleteComment([req.params.id, req.body.question_id]).then((comments) => res.status(200).send(comments))
     }
         
         
