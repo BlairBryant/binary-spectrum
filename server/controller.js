@@ -56,9 +56,11 @@ module.exports = {
     deleteComment: (req, res) => {
         const db = req.app.get('db')
 
-        db.deleteComment([req.body.comment_id]).then(() => res.status(200).send())
-        .catch(() => res.status(500).send())
+        db.deleteComment([req.params.id]).then((comments) => res.status(200).send(comments))
     }
+        
+        
+    
 
 
 }

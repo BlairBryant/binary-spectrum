@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
+import {readComments} from '../ducks/reducer'
 
 class Comment extends Component {
     constructor(props) {
@@ -10,7 +11,7 @@ class Comment extends Component {
             editToggle: false,
             editTheComment: '',
         }
-        this.setToggle = this.setToggle.bind(this)
+        this.setEditToggle = this.setEditToggle.bind(this)
         this.deleteComment = this.deleteComment.bind(this)
     }
 
@@ -18,18 +19,20 @@ class Comment extends Component {
         this.setState({editTheComment: this.props.commentObject.comment})
     }
 
-    setToggle() {
+    setEditToggle() {
         this.setState({editToggle: !this.state.editToggle})
-        // if(this.state.editTheComment !== this.props.commentObject.comment){
-        //     axios.put('/api/result/editComment', {editComment: this.state.editTheComment, comment_id: this.props.commentObject.comment_id}).then(res => {
-        //         console.log('edit worked. I think. Here is new editTheCommentState: ', this.state.editTheComment)
-        //     })
-        // }
+        if(this.state.editTheComment !== this.props.commentObject.comment){
+            axios.put('/api/result/editComment', {editComment: this.state.editTheComment, comment_id: this.props.commentObject.comment_id}).then(res => {
+                console.log('edit worked. I think. Here is new editTheCommentState: ', this.state.editTheComment)
+                console.log('this is res.data for edit: ', res.data)
+                this.props.readComments(res.data)
+            })
+        }
     }
 
     deleteComment() {
-        axios.delete('/api/result/deleteComment', {comment_id: this.props.commentObject.comment_id}).then(() => {
-            console.log('comment deleted. I think.')
+        axios.delete(`/api/result/deleteComment/${this.props.commentObject.comment_id}`).then(res => {
+            this.props.readComments(res.data)
         })
     }
 
@@ -38,8 +41,8 @@ class Comment extends Component {
         const { userSession } = this.props
         const { editToggle } = this.state
         // console.log('this is commentObject ', commentObject)
-        console.log(this.props)
-        console.log('this is state: ', this.state)
+        // console.log(this.props)
+        // console.log('this is state: ', this.state)
         return (
             <div className='comment' id={commentObject.a ? 'commentA' : ''}>
                 <section className='commentOptionsWrapper'>
@@ -50,7 +53,7 @@ class Comment extends Component {
                             <div className='buttonsHolder'>
                                 <div className='button'
                                      id='editButton'
-                                     onClick={() => this.setToggle()}>
+                                     onClick={() => this.setEditToggle()}>
                                      {editToggle ? 'Save' : 'Edit'}
                                 </div>
                                 <div className='button' id='deleteButton' onClick={() => this.deleteComment()}>Delete</div>
@@ -74,7 +77,8 @@ class Comment extends Component {
 function mapStateToProps(state) {
     return {
         userSession: state.userSession,
+        commentsResult: state.commentsResult
     }
 }
 
-export default connect(mapStateToProps)(Comment)
+export default connect(mapStateToProps, {readComments})(Comment)
