@@ -45,12 +45,15 @@ class Comment extends Component {
     addSmile() {
         axios.post(`/api/result/addSmile`, {comment_id: this.props.commentObject.comment_id}).then(res => {
             console.log('addSmile resdata: ', res.data)
-            // this.setState({smiles: })
+            this.setState({smiles: res.data[0].smiles})
         })
     }
 
     addFrown() {
-
+        axios.post(`/api/result/addFrown`, {comment_id: this.props.commentObject.comment_id}).then(res => {
+            console.log('addFrown resdata: ', res.data)
+            this.setState({frowns: res.data[0].frowns})
+        })
     }
 
     render() {

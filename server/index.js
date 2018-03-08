@@ -89,6 +89,7 @@ app.put('/api/result/editComment', ctrl.editComment)
 app.put('/api/result/deleteComment/:id', ctrl.deleteComment)
 app.get('/api/result/getSmiles/:id', ctrl.getSmiles)
 app.post('/api/result/addSmile', ctrl.addSmile)
+app.post('/api/result/addFrown', ctrl.addFrown)
 
 
 app.listen(SERVER_PORT, () => console.log(`Hey mang I'm glistening on port ${SERVER_PORT}`))

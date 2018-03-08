@@ -1,6 +1,5 @@
-UPDATE smiles
-SET smile = 1
-WHERE comment_id = $1 AND user_id = $2;
+INSERT INTO smiles (comment_id, user_id, smile, frown)
+VALUES ($1, $2, 1, null);
 
 SELECT COUNT(smile) AS smiles,
 COUNT(frown) AS frowns 

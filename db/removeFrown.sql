@@ -1,5 +1,5 @@
 UPDATE smiles
-SET smile = 1
+SET frown = null
 WHERE comment_id = $1 AND user_id = $2;
 
 SELECT COUNT(smile) AS smiles,

@@ -71,12 +71,39 @@ module.exports = {
     },
     addSmile: (req, res) => {
         const db = req.app.get('db')
+        const {comment_id} = req.body
+        const {user_id} = req.user
 
-        db.addSmile([req.body.comment_id]).then(smiles => res.status(200).send(smiles))
+        db.checkSmiles([comment_id, user_id]).then(userSmile => {
+            
+            if(userSmile.length === 0) {
+                db.insertSmile([comment_id, user_id]).then(smiles => res.status(200).send(smiles))
+            }
+            else if(userSmile[0].smile === 1) {
+                db.removeSmile([comment_id, user_id]).then(smiles => res.status(200).send(smiles))
+            }
+            else if (!userSmile[0].smile) {
+                db.addSmile([comment_id, user_id]).then(smiles => res.status(200).send(smiles))
+            }
+        })
     },
-        
-        
+    addFrown: (req, res) => {
+        const db = req.app.get('db')
+        const {comment_id} = req.body
+        const {user_id} = req.user
+
+        db.checkSmiles([comment_id, user_id]).then(userFrown => {
+            console.log(userFrown)
+            if(userFrown.length === 0) {
+                db.insertFrown([comment_id, user_id]).then(smiles => res.status(200).send(smiles))
+            }
+            else if(userFrown[0].frown === 1) {
+                db.removeFrown([comment_id, user_id]).then(smiles => res.status(200).send(smiles))
+            }
+            else if (!userFrown[0].frown) {
+                db.addFrown([comment_id, user_id]).then(smiles => res.status(200).send(smiles))
+            }
+        })
+    },
     
-
-
 }
