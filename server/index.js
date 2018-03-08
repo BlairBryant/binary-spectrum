@@ -87,6 +87,8 @@ app.get('/getSessionUser', ctrl.getSessionUser)
 app.post('/api/result/postComment', ctrl.addComment)
 app.put('/api/result/editComment', ctrl.editComment)
 app.put('/api/result/deleteComment/:id', ctrl.deleteComment)
+app.get('/api/result/getSmiles/:id', ctrl.getSmiles)
+app.post('/api/result/addSmile', ctrl.addSmile)
 
 
-app.listen(SERVER_PORT, () => console.log(`listening on port ${SERVER_PORT}`))
+app.listen(SERVER_PORT, () => console.log(`Hey mang I'm glistening on port ${SERVER_PORT}`))

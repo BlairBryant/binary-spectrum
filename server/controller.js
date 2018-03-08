@@ -63,7 +63,17 @@ module.exports = {
         const db = req.app.get('db')
 
         db.deleteComment([req.params.id, req.body.question_id]).then((comments) => res.status(200).send(comments))
-    }
+    },
+    getSmiles: (req, res) => {
+        const db = req.app.get('db')
+
+        db.getSmiles([req.params.id]).then(smiles => res.status(200).send(smiles))
+    },
+    addSmile: (req, res) => {
+        const db = req.app.get('db')
+
+        db.addSmile([req.body.comment_id]).then(smiles => res.status(200).send(smiles))
+    },
         
         
     
