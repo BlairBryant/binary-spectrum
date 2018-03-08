@@ -40,9 +40,7 @@ class QA extends Component {
         })
     }
     postAnswer(aorb) {
-        axios.put(`/QA/${aorb}`, {questionId: this.state.questionId}).then(res => {
-            console.log('Passed a 1 into ', aorb)
-        })
+        axios.put(`/QA/${aorb}`, {questionId: this.state.questionId})
     }
 
 

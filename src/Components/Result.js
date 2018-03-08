@@ -50,7 +50,6 @@ class Result extends Component {
     }
 
     render() {
-        // console.log(this.props)
         let mappedComments = this.props.commentsResult.map((x, i) => {
             return <Comment key={x.comment_id} commentObject={x} />
         })
