@@ -22,8 +22,7 @@ class Comment extends Component {
     componentDidMount() {
         this.setState({ editTheComment: this.props.commentObject.comment })
         axios.get(`/api/result/getSmiles/${this.props.commentObject.comment_id}`).then(res => {
-            // console.log('this is res.data for smiles: ', res.data)
-            this.setState({smiles: res.data[0].smiles, frowns: res.data[0].frowns})
+            this.setState({ smiles: res.data[0].smiles, frowns: res.data[0].frowns })
         })
     }
 
@@ -43,25 +42,20 @@ class Comment extends Component {
     }
 
     addSmile() {
-        axios.post(`/api/result/addSmile`, {comment_id: this.props.commentObject.comment_id}).then(res => {
-            console.log('addSmile resdata: ', res.data)
-            this.setState({smiles: res.data[0].smiles})
+        axios.post(`/api/result/addSmile`, { comment_id: this.props.commentObject.comment_id }).then(res => {
+            this.setState({ smiles: res.data[0].smiles })
         })
     }
 
     addFrown() {
-        axios.post(`/api/result/addFrown`, {comment_id: this.props.commentObject.comment_id}).then(res => {
-            console.log('addFrown resdata: ', res.data)
-            this.setState({frowns: res.data[0].frowns})
+        axios.post(`/api/result/addFrown`, { comment_id: this.props.commentObject.comment_id }).then(res => {
+            this.setState({ frowns: res.data[0].frowns })
         })
     }
 
     render() {
         const { commentObject, userSession } = this.props
         const { editToggle } = this.state
-
-        // console.log(this.state)
-
         return (
             <div className='comment' id={commentObject.a ? 'commentA' : ''}>
                 <section className='commentOptionsWrapper'>
@@ -95,7 +89,7 @@ class Comment extends Component {
                     <div>{this.state.smiles}</div>
                     <div className='smileButton' onClick={() => this.addFrown()}>:(</div>
                     <div>{this.state.frowns}</div>
-                </section>           
+                </section>
             </div>
         )
     }
