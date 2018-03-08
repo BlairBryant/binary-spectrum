@@ -9,4 +9,4 @@ CREATE TABLE smiles (
 )
 
 INSERT INTO smiles (comment_id, user_id, smile, frown)
-VALUES (1, 1, 1, 0)
+VALUES (1, 1, 1, null)

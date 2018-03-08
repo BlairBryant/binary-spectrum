@@ -2,7 +2,7 @@
   text-align: center;
   background: linear-gradient(to bottom,  #fff, #ccccb2);
   width: 100%;
-  height: 100vh;
+  height: 100%;
   font-family: 'Oxygen', sans-serif;
 }
 
@@ -37,34 +37,36 @@ a {
   z-index: 3;
 }
 
-
-
 /* ----------------------------------------------- */
 
 .QA {
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .questionHolder {
-  width: 70%;
-  height: 30vh;
+  width: 80%;
+  height: 60vh;
   background: #E8DAB2;
   margin: 40px;
+  border-radius: 10px;
 }
 
 .answersHolder {
-  width: 70%;
-  height: 20vw;
+  width: 80%;
+  /* height: 20vh; */
   display: flex;
   justify-content: space-between
 }
 
 .ansButton {
-  width: 50px;
+  width: 140px;
   height: 120px;
   background: #E8DAB2;
+  border-radius: 10px;
 }
 
 
@@ -74,25 +76,108 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 30px;
+  box-sizing: border-box;
 }
 
-.qHolder {
-  width: 60vw;
+/* .qHolder {
+  width: 80%;
   height: 16vh;
   background: #E8DAB2;
   margin: 40px;
-}
+  border-radius: 10px;  
+} */
 
 .percentDisplay {
   width: 200px;
   height: 200px;
   background: white;
-  margin-top: 20px;
   margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4em;
+  border-radius: 10px;
 }
 
-.result section {
-  width: 50vw;
-  min-height: 300px;
+.commentsHolder {
+  width: 84%;
+  min-height: 180px;
   background: #E8DAB2;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding-bottom: 10px
+}
+
+textarea {
+  border: none;
+  outline: none;
+  font-family: 'Oxygen', sans-serif;
+  margin-bottom: 10px;
+}
+
+/* ----------------------------------------------- */
+
+.comment {
+  width: 80%;
+  min-height: 40px;
+  background: lightblue;
+  margin: 5px;
+  border-radius: 8px;
+  padding: 4px;
+  padding-left: 8px;
+  box-sizing: border-box;
+  text-align: left;
+  margin-right: -28px;
+}
+
+#commentA {
+  background: aquamarine;
+  margin-right: 28px;
+}
+
+.commentOptionsWrapper {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.buttonsHolder {
+  font-weight: 400;
+  display: flex;
+}
+
+.button {
+  background: lightgray;
+  margin-left: 8px;
+}
+
+.commentOrTextarea {
+  margin-bottom: 8px;
+}
+
+.editingTextArea {
+  width: 70%;
+  height: 36px;
+  margin: 0px;
+}
+
+.smiles {
+  display: flex;
+}
+
+.smiles div {
+  margin-right: 8px;
+}
+
+.smileButton {
+  background: white;
+  width: 18px;
+  border-radius: 3px;
+  text-align: center;
+
 }
