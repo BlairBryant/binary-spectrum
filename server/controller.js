@@ -1,8 +1,12 @@
 module.exports = {
     userCheck: (req, res) => {
         const db = req.app.get('db')
+        let date = new Date(Date.now())
+        let today = date.getDate()
+        let month = date.getMonth()
+        let year = date.getFullYear()
 
-        db.userCheck([req.user.user_id]).then(vote => res.status(200).send(vote))
+        db.userCheck([req.user.user_id, year, month, today]).then(vote => res.status(200).send(vote))
     },
     getQuestion: (req, res) => {
         const db = req.app.get('db');

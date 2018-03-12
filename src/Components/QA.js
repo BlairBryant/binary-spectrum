@@ -18,6 +18,9 @@ class QA extends Component {
        
     }
     componentWillMount() {
+        
+    }
+    componentDidMount() {
         axios.get(`/QA/usercheck`).then(res => {
             // console.log(res.data)
             if(res.data.length) {
@@ -28,9 +31,7 @@ class QA extends Component {
                     this.setState({resultEndpoint: 'B', redirect: true})
                 }
             }
-        })
-    }
-    componentDidMount() {
+        
         axios.get(`/QA`).then(res => {
             // console.log(res.data)
             this.props.readQuestion(res.data[0].question)
@@ -38,7 +39,9 @@ class QA extends Component {
             this.props.readAnswerB(res.data[0].answerb)
             this.setState({questionId: res.data[0].question_id})
         })
+        })
     }
+
     postAnswer(aorb) {
         axios.put(`/QA/${aorb}`, {questionId: this.state.questionId})
     }
