@@ -13,7 +13,7 @@ var currentDay=1
 
 const {
     SERVER_PORT,
-    SECRET,
+    SESSION_SECRET,
     DOMAIN,
     CLIENT_ID,
     CLIENT_SECRET,
@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 app.use(cors())
 
 app.use(session({
-    secret: SECRET,
+    secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: true
 }))
