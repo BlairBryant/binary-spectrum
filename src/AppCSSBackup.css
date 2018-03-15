@@ -1,0 +1,240 @@
+.App {
+    text-align: center;
+    background: #eee;
+    /* background: #f5edd1; */
+    width: 100%;
+    height: 100%;
+    font-family: 'Oxygen', sans-serif;
+    color: #000
+  }
+  
+  a {
+    text-decoration: none;
+    color: #fff;
+    outline: none !important;
+  }
+  
+  a:focus {
+    outline: none !important;
+  }
+  
+  .signInDiv:focus {
+    outline: none;
+  }
+  
+  
+  /* ----------------------------------------------- */
+  
+  .home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+    font-weight: 400;
+    text-shadow: 1px 1px 4px #666;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #eee;
+  }
+  
+  .colorTop {
+    width: 800px;
+    height: 600px;
+    background: #ff5;
+    transform: rotate(10deg);
+    position: absolute;
+    top: -150px
+  }
+  
+  .binary {
+    position: absolute;
+    top: 2%;
+    left: 13.2%;
+    font-size: 68px;  
+  }
+  
+  .spectrum {
+    position: absolute;
+    top: 13%;
+    left: 14%;
+    font-size: 60px;
+  }
+  
+  .home h2 {
+    width: 300px;
+    position: absolute;
+    top: 32%;
+    left: 15%;
+    text-shadow: none;
+    color: #666;
+    font-size: 22px;
+    text-align: left;
+  }
+  
+  .signInButton {
+    width: 150px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 75vh;
+    z-index: 3;
+    text-shadow: none;
+    background: #ff5;
+    border-bottom: 1px solid;
+    border-bottom-color: #b39225;
+    box-shadow: 1px 1px #b39225;
+    color: #333;
+    font-weight: 700;
+    font-size: 26px;
+  }
+  
+  /* ----------------------------------------------- */
+  
+  .QA {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .questionHolder {
+    width: 80%;
+    height: 60vh;
+    background: #E8DAB2;
+    margin: 40px;
+    border-radius: 10px;
+  }
+  
+  .answersHolder {
+    width: 80%;
+    /* height: 20vh; */
+    display: flex;
+    justify-content: space-between
+  }
+  
+  .ansButton {
+    width: 140px;
+    height: 120px;
+    background: #E8DAB2;
+    border-radius: 10px;
+  }
+  
+  
+  /* ----------------------------------------------- */
+  
+  .result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+    box-sizing: border-box;
+  }
+  
+  /* .qHolder {
+    width: 80%;
+    height: 16vh;
+    background: #E8DAB2;
+    margin: 40px;
+    border-radius: 10px;  
+  } */
+  
+  .percentDisplay {
+    width: 200px;
+    height: 200px;
+    background: white;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4em;
+    border-radius: 10px;
+  }
+  
+  .commentsHolder {
+    width: 84%;
+    min-height: 180px;
+    background: #E8DAB2;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding-bottom: 10px
+  }
+  
+  textarea {
+    border: none;
+    outline: none;
+    font-family: 'Oxygen', sans-serif;
+    margin-bottom: 10px;
+  }
+  
+  /* ----------------------------------------------- */
+  
+  .comment {
+    width: 80%;
+    min-height: 40px;
+    background: lightblue;
+    margin: 5px;
+    border-radius: 8px;
+    padding: 4px;
+    padding-left: 8px;
+    box-sizing: border-box;
+    text-align: left;
+    margin-right: -28px;
+  }
+  
+  #commentA {
+    background: aquamarine;
+    margin-right: 28px;
+  }
+  
+  .commentOptionsWrapper {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  
+  .buttonsHolder {
+    font-weight: 400;
+    display: flex;
+  }
+  
+  .button {
+    background: lightgray;
+    margin-left: 8px;
+  }
+  
+  .commentOrTextarea {
+    margin-bottom: 8px;
+  }
+  
+  .editingTextArea {
+    width: 70%;
+    height: 36px;
+    margin: 0px;
+  }
+  
+  .smiles {
+    display: flex;
+  }
+  
+  .smiles div {
+    margin-right: 8px;
+  }
+  
+  .smileButton {
+    background: white;
+    width: 18px;
+    border-radius: 3px;
+    text-align: center;
+  
+  }
