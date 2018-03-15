@@ -42,7 +42,7 @@ class Home extends Component {
                 <h1 className={fadeIn ? 'binary fadeIn' : 'binary'}>Binary</h1>
                 <h1 className={fadeIn ? 'spectrum fadeIn' : 'spectrum'}>Spectrum</h1>
                 <h2 className={blurbSlide ? 'topBlurb blurbLeft' : 'topBlurb'}>Discover where you stand</h2>
-                <h2 className={blurbSlide ? 'bottomBlurb blurbRight' : 'bottomBlurb'}>on various fronts</h2>
+                <h2 className={blurbSlide ? 'bottomBlurb blurbRight' : 'bottomBlurb'}>on various fronts.</h2>
                 <a href='http://localhost:3500/auth' className={signSlide ? 'signInButton signSlide' : 'signInButton'}><div className='signInDiv'>
                 Sign in
                 </div></a>

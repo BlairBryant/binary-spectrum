@@ -57,13 +57,14 @@ class QA extends Component {
         }
         return(
             <div className="QA">
-                <div className='colorTop' id='QAcolortop'></div>
+                <div className='colorTop' id='QAcolorTop'></div>
+                <div className='colorTop' id='QAcolorBottom'></div>
                 <div className={questionGrow ? 'questionHolder questionGrow' : "questionHolder"}>
                     {this.props.question}
                 </div>
                 <section className="answersHolder">
-                    <Link to='/Result/A'><div className="ansButton" onClick={() => this.postAnswer('A')}>{this.props.answerA}</div></Link>
-                    <Link to='/Result/B'><div className="ansButton" onClick={() => this.postAnswer('B')}>{this.props.answerB}</div></Link>
+                    <Link to='/Result/A'><div className="ansButton" id='ansLeft' onClick={() => this.postAnswer('A')}>{this.props.answerA}</div></Link>
+                    <Link to='/Result/B'><div className="ansButton" id='ansRight' onClick={() => this.postAnswer('B')}>{this.props.answerB}</div></Link>
                 </section>
             </div>
         )
