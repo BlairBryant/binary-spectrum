@@ -4,7 +4,7 @@
   width: 100%;
   height: 100%;
   font-family: 'Oxygen', sans-serif;
-  color: #000
+  color: #333
 }
 
 a {
@@ -28,7 +28,6 @@ a:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #333;
   font-weight: 400;
   text-shadow: 1px 1px 4px #666;
   position: fixed;
@@ -80,7 +79,6 @@ a:focus {
 .home h2 {
   width: 300px;
   position: absolute;
-
   text-shadow: none;
   color: #666;
   font-size: 22px;
@@ -142,16 +140,21 @@ a:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #333
+  text-align: left;
 }
 
 .questionHolder {
   width: 80%;
   height: 60vh;
   border-radius: 10px;
-  font-size: 24px;
+  font-size: 0px;
   position: absolute;
   top: 60px;
+  transition: 1s
+}
+
+.questionGrow {
+  font-size: 24px;
 }
 
 .answersHolder {
@@ -159,14 +162,17 @@ a:focus {
   position: absolute;
   top: 70vh;
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 .ansButton {
   width: 140px;
-  height: 120px;
+  height: 100px;
   background: #E8DAB2;
   border-radius: 10px;
+  color: #333;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
 
@@ -195,19 +201,29 @@ a:focus {
 .percentDisplay {
   width: 200px;
   height: 200px;
-  margin-bottom: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 4em;
+  font-size: 9em;
   border-radius: 10px;
   position: relative;
   z-index: 2;
+  transition: 1s;
+}
+
+.percentShrink {
+  font-size: 4em;
+}
+
+#votedBlurb {
+  position: relative;
+  z-index: 2;
+  margin: none;
 }
 
 .commentsHolder {
   width: 84%;
-  min-height: 180px;
+  min-height: 340px;
   background: #E8DAB2;
   border-radius: 10px;
   display: flex;

@@ -12,12 +12,14 @@ class QA extends Component {
         this.state = {
             resultEndpoint: '',
             redirect: false,
-            questionId: -1,
-            questionGrow: false
+            questionId: -1
         }
-        this.questionGrow = this.questionGrow.bind(this)
+        //this might break things. But should be speedier than componentWillMount or didMount.
+       
     }
-
+    componentWillMount() {
+        
+    }
     componentDidMount() {
         axios.get(`/QA/usercheck`).then(res => {
             // console.log(res.data)
@@ -38,30 +40,26 @@ class QA extends Component {
             this.setState({questionId: res.data[0].question_id})
         })
         })
-        window.setTimeout(this.questionGrow)
     }
 
     postAnswer(aorb) {
         axios.put(`/QA/${aorb}`, {questionId: this.state.questionId})
     }
 
-    questionGrow() {
-        this.setState({questionGrow: true})
-    }
-
 
     render() {
-        const {questionGrow} = this.state
+        // console.log(this.props)
         if(this.state.redirect) {
             return <Redirect to={`/Result/${this.state.resultEndpoint}`} />
         }
         return(
             <div className="QA">
                 <div className='colorTop' id='QAcolortop'></div>
-                <div className={questionGrow ? 'questionHolder questionGrow' : "questionHolder"}>
+                <div className="questionHolder">
                     {this.props.question}
                 </div>
                 <section className="answersHolder">
+                {/* Change links below */}
                     <Link to='/Result/A'><div className="ansButton" onClick={() => this.postAnswer('A')}>{this.props.answerA}</div></Link>
                     <Link to='/Result/B'><div className="ansButton" onClick={() => this.postAnswer('B')}>{this.props.answerB}</div></Link>
                 </section>

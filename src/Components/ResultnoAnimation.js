@@ -10,10 +10,8 @@ class Result extends Component {
         super()
 
         this.state = {
-            questionId: -1,
-            percentShrink: false
+            questionId: -1
         }
-        this.percentShrink = this.percentShrink.bind(this)
     }
 
     componentDidMount() {
@@ -32,7 +30,6 @@ class Result extends Component {
                     Math.round(+res.data[0].b_total/(+res.data[0].a_total + +res.data[0].b_total)*100))
                 }
             })
-            window.setTimeout(this.percentShrink)
             // get comments
             axios.get(`/result/comments/${this.state.questionId}`).then(res => {
                 this.props.readComments(res.data)
@@ -52,12 +49,7 @@ class Result extends Component {
         }
     }
 
-    percentShrink() {
-        this.setState({percentShrink: true})
-    }
-
     render() {
-        const {percentShrink} = this.state
         let mappedComments = this.props.commentsResult.map((x, i) => {
             return <Comment key={x.comment_id} commentObject={x} />
         })
@@ -65,8 +57,8 @@ class Result extends Component {
             <div className='result'>
                 <div className='colorTop' id='resultColorTop'></div>
                 {/* <div className='qHolder'>{this.props.questionResult}</div> */}
-                <div className={percentShrink ? 'percentDisplay percentShrink' : 'percentDisplay'}>{`${this.props.percentResult}%`}</div>
-                <h4 id='votedBlurb'>of users voted the same as you</h4>
+                <div className='percentDisplay'>{`${this.props.percentResult}%`}</div>
+                <h4>of users voted the same as you</h4>
 
                 <section className='commentsHolder'>Comments Holder <br /><br />
                     <textarea value={this.props.comment} 
