@@ -55,6 +55,7 @@ class Result extends Component {
         })
         return(
             <div className='result'>
+                <div className='colorTop' id='resultColorTop'></div>
                 {/* <div className='qHolder'>{this.props.questionResult}</div> */}
                 <div className='percentDisplay'>{`${this.props.percentResult}%`}</div>
 

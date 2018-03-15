@@ -54,6 +54,7 @@ class QA extends Component {
         }
         return(
             <div className="QA">
+                <div className='colorTop' id='QAcolortop'></div>
                 <div className="questionHolder">
                     {this.props.question}
                 </div>
