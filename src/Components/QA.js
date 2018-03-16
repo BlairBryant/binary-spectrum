@@ -20,7 +20,6 @@ class QA extends Component {
 
     componentDidMount() {
         axios.get(`/QA/usercheck`).then(res => {
-            // console.log(res.data)
             if(res.data.length) {
                 if(res.data[0].a_vote) {
                     this.setState({resultEndpoint: 'A', redirect: true})
@@ -31,7 +30,6 @@ class QA extends Component {
             }
         
         axios.get(`/QA`).then(res => {
-            // console.log(res.data)
             this.props.readQuestion(res.data[0].question)
             this.props.readAnswerA(res.data[0].answera)
             this.props.readAnswerB(res.data[0].answerb)
@@ -58,14 +56,17 @@ class QA extends Component {
         return(
             <div className="QA">
                 <div className='colorTop' id='QAcolorTop'></div>
-                {/* <div className='colorTop' id='QAcolorLeft'></div> */}
                 <div className='colorTop' id='QAcolorBottom'></div>
+                <div className='whiteOpacity'></div>
+                <h2>Today's Question</h2>
                 <div className={questionGrow ? 'questionHolder questionGrow' : "questionHolder"}>
                     {this.props.question}
                 </div>
+                <h3 className='answerAtext'><span>A : </span>{this.props.answerA}</h3>
+                <h3 className='answerBtext'><span>B : </span>{this.props.answerB}</h3>
                 <section className="answersHolder">
-                    <Link to='/Result/A'><div className="ansButton" id='ansLeft' onClick={() => this.postAnswer('A')}>{this.props.answerA}</div></Link>
-                    <Link to='/Result/B'><div className="ansButton" id='ansRight' onClick={() => this.postAnswer('B')}>{this.props.answerB}</div></Link>
+                    <Link to='/Result/A'><div className="ansButton" id='ansLeft' onClick={() => this.postAnswer('A')}>A</div></Link>
+                    <Link to='/Result/B'><div className="ansButton" id='ansRight' onClick={() => this.postAnswer('B')}>B</div></Link>
                 </section>
             </div>
         )

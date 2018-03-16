@@ -32,7 +32,7 @@ class Result extends Component {
                     Math.round(+res.data[0].b_total/(+res.data[0].a_total + +res.data[0].b_total)*100))
                 }
             })
-            window.setTimeout(this.percentShrink)
+            window.setTimeout(this.percentShrink, 400)
             // get comments
             axios.get(`/result/comments/${this.state.questionId}`).then(res => {
                 this.props.readComments(res.data)
@@ -64,12 +64,14 @@ class Result extends Component {
         return(
             <div className='result'>
                 <div className='colorTop' id='resultColorTop'></div>
+                <div className='colorTop' id='resultColorLeft'></div>
                 {/* <div className='qHolder'>{this.props.questionResult}</div> */}
                 <div className={percentShrink ? 'percentDisplay percentShrink' : 'percentDisplay'}>{`${this.props.percentResult}%`}</div>
                 <h4 id='votedBlurb'>of users voted the same as you</h4>
 
-                <section className='commentsHolder'>Comments Holder <br /><br />
-                    <textarea value={this.props.comment} 
+                <section className='commentsHolder'>
+                    <textarea value={this.props.comment}
+                              className='textInputArea' 
                               placeholder='Leave a comment' 
                               onChange={(e) => this.props.typingComment(e.target.value)}
                               onKeyPress={(e) => this.postComment(e)}
