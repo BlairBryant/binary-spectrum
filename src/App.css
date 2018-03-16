@@ -162,17 +162,31 @@ a:focus {
   position: fixed;
 }
 
-#QAcolorTop {
+/* #QAcolorTop {
   height: 300px;
   top: -50px;
+} */
+
+#QAcolorTop {
+  height: 300px;
+  top: 400px;
+  right: -20px;
+  transform: rotate(70deg);
 }
+
+/* #QAcolorLeft {
+  height: 200px;
+  top: 300px;
+  z-index: 1;
+  transform: rotate(70deg)
+} */
 
 #QAcolorBottom {
   top: 400px;
-  left: -10px;
+  left: 20px;
   height: 300px;
   background: #5C80BC;
-  transform: rotate(110deg)
+  transform: rotate(130deg)
 }
 
 .questionHolder {
@@ -204,6 +218,8 @@ a:focus {
   color: #333;
   box-sizing: border-box;
   padding: 10px;
+  position: relative;
+  z-index: 2;
 }
 
 #ansLeft {
@@ -215,7 +231,6 @@ a:focus {
   border: 5px solid #ff5;
   background: #ffb;
 }
-
 
 /* ----------------------------------------------- */
 

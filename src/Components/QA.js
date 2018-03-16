@@ -58,6 +58,7 @@ class QA extends Component {
         return(
             <div className="QA">
                 <div className='colorTop' id='QAcolorTop'></div>
+                {/* <div className='colorTop' id='QAcolorLeft'></div> */}
                 <div className='colorTop' id='QAcolorBottom'></div>
                 <div className={questionGrow ? 'questionHolder questionGrow' : "questionHolder"}>
                     {this.props.question}
