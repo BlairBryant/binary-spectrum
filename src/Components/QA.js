@@ -13,9 +13,7 @@ class QA extends Component {
             resultEndpoint: '',
             redirect: false,
             questionId: -1,
-            questionGrow: false
         }
-        this.questionGrow = this.questionGrow.bind(this)
     }
 
     componentDidMount() {
@@ -36,17 +34,11 @@ class QA extends Component {
             this.setState({questionId: res.data[0].question_id})
         })
         })
-        window.setTimeout(this.questionGrow)
     }
 
     postAnswer(aorb) {
         axios.put(`/QA/${aorb}`, {questionId: this.state.questionId})
     }
-
-    questionGrow() {
-        this.setState({questionGrow: true})
-    }
-
 
     render() {
         const {questionGrow} = this.state
@@ -59,7 +51,7 @@ class QA extends Component {
                 <div className='colorTop' id='QAcolorBottom'></div>
                 <div className='whiteOpacity'></div>
                 <h2>Today's Question</h2>
-                <div className={questionGrow ? 'questionHolder questionGrow' : "questionHolder"}>
+                <div className="questionHolder">
                     {this.props.question}
                 </div>
                 <h3 className='answerAtext'><span>A : </span>{this.props.answerA}</h3>
