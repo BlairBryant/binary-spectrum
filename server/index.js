@@ -6,7 +6,6 @@ const ctrl = require('./controller');
 const session = require('express-session')
 const passport = require('passport')
 const Auth0Strategy = require('passport-auth0')
-const checkForSession = require('./middleware/checkForSession')
 require('dotenv').config()
 
 const {

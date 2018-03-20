@@ -41,7 +41,6 @@ class QA extends Component {
     }
 
     render() {
-        const {questionGrow} = this.state
         if(this.state.redirect) {
             return <Redirect to={`/Result/${this.state.resultEndpoint}`} />
         }
