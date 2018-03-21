@@ -17,13 +17,10 @@ class Result extends Component {
     }
 
     componentDidMount() {
-        // get question
-        axios.get(`/QA`).then(res => {
+        axios.get(`/api/QA`).then(res => {
             this.setState({questionId: res.data[0].question_id})
             this.props.readQuestionResult(res.data[0].question)
-            // get percent
-            axios.get(`/result/percent/${this.state.questionId}`).then(res => {
-                // console.log(res.data)
+            axios.get(`/api/result/percent/${this.state.questionId}`).then(res => {
                 if(this.props.match.params.id === 'A') {
                     this.props.readPercent(
                     Math.round(+res.data[0].a_total/(+res.data[0].a_total + +res.data[0].b_total)*100))
@@ -33,11 +30,10 @@ class Result extends Component {
                 }
             })
             window.setTimeout(this.percentShrink, 400)
-            // get comments
-            axios.get(`/result/comments/${this.state.questionId}`).then(res => {
+            axios.get(`/api/result/comments/${this.state.questionId}`).then(res => {
                 this.props.readComments(res.data)
             })
-            axios.get(`/getSessionUser`).then(res => {
+            axios.get(`/api/getSessionUser`).then(res => {
                 this.props.readUserSession(res.data)
             })
         })
