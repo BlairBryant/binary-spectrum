@@ -1,0 +1,13 @@
+package.json
+  "proxy": "http://192.168.1.81:3500"
+
+home.js
+<a href='http://192.168.1.81:3500/auth' className='signInButton'><div className='signInDiv'>
+                Sign in
+                </div></a>
+
+index.js
+    successRedirect: `http://192.168.1.81:3000/#/QA`
+
+.env
+CALLBACK_URL=http://192.168.1.81:3500/auth/callback

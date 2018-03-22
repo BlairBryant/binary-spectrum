@@ -1,40 +1,64 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import {Redirect} from 'react-router'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {readQuestion, readAnswerA, readAnswerB} from '../ducks/reducer'
 
 class QA extends Component {
+    constructor() {
+        super()
+
+        this.state = {
+            resultEndpoint: '',
+            redirect: false,
+            questionId: -1,
+        }
+    }
 
     componentDidMount() {
-        axios.get(`/QA/${this.props.match.params.id}`).then(res => {
+        axios.get(`/api/QA/usercheck`).then(res => {
+            if(res.data.length) {
+                if(res.data[0].a_vote) {
+                    this.setState({resultEndpoint: 'A', redirect: true})
+                }
+                else if(res.data[0].b_vote) {
+                    this.setState({resultEndpoint: 'B', redirect: true})
+                }
+            }
+        
+        axios.get(`/api/QA`).then(res => {
             this.props.readQuestion(res.data[0].question)
-            this.props.readAnswerA(res.data[0].a)
-            this.props.readAnswerB(res.data[0].b)
+            this.props.readAnswerA(res.data[0].answera)
+            this.props.readAnswerB(res.data[0].answerb)
+            this.setState({questionId: res.data[0].question_id})
+        })
         })
     }
 
     postAnswer(aorb) {
-        axios.put(`/QA/${aorb}`, this.props.match.params.id).then(res => {
-            console.log('Increased by 1 on ', aorb)
-        })
+        axios.put(`/api/QA/${aorb}`, {questionId: this.state.questionId})
     }
 
-
     render() {
-        console.log(this.props)
+        if(this.state.redirect) {
+            return <Redirect to={`/Result/${this.state.resultEndpoint}`} />
+        }
         return(
             <div className="QA">
+                <div className='colorTop' id='QAcolorTop'></div>
+                <div className='colorTop' id='QAcolorBottom'></div>
+                <div className='whiteOpacity'></div>
+                <h2>Today's Question</h2>
                 <div className="questionHolder">
                     {this.props.question}
                 </div>
-
+                <h3 className='answerAtext'><span>A : </span>{this.props.answerA}</h3>
+                <h3 className='answerBtext'><span>B : </span>{this.props.answerB}</h3>
                 <section className="answersHolder">
-                {/* Change links below */}
-                    <Link to='/Result/1A'><div className="ansButton" onClick={() => this.postAnswer('A')}>{this.props.answerA}</div></Link>
-                    <Link to='/Result/1B'><div className="ansButton" onClick={() => this.postAnswer('B')}>{this.props.answerB}</div></Link>
+                    <Link to='/Result/A'><div className="ansButton" id='ansLeft' onClick={() => this.postAnswer('A')}>A</div></Link>
+                    <Link to='/Result/B'><div className="ansButton" id='ansRight' onClick={() => this.postAnswer('B')}>B</div></Link>
                 </section>
-
             </div>
         )
     }

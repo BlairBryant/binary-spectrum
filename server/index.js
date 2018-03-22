@@ -6,12 +6,11 @@ const ctrl = require('./controller');
 const session = require('express-session')
 const passport = require('passport')
 const Auth0Strategy = require('passport-auth0')
-const checkForSession = require('./middleware/checkForSession')
 require('dotenv').config()
 
-var currentDay=1
-
 const {
+    REACT_APP_LOGIN,
+    REACT_APP_SUCCESS,
     SERVER_PORT,
     SESSION_SECRET,
     DOMAIN,
@@ -22,6 +21,13 @@ const {
 } = process.env
 
 const app = express();
+
+app.use(express.static( `${__dirname}/../build` ))
+
+massive(CONNECTION_STRING).then(db => {
+    app.set('db', db)
+})
+
 app.use(bodyParser.json());
 app.use(cors())
 
@@ -30,8 +36,6 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }))
-
-app.use(checkForSession)
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -42,36 +46,53 @@ passport.use(new Auth0Strategy({
     callbackURL: CALLBACK_URL,
     scope: 'openid profile'
 }, function (accessToken, refreshToken, extraParams, profile, done) {
-    done(null, profile)
+    const db = app.get('db')
+    db.findUser([profile.id]).then(user => {
+        if(!user[0]) {
+            db.createUser([profile.displayName, profile.id])
+            .then(userCreated => {
+                done(null, userCreated[0].user_id)
+            })
+        } else {
+            done(null, user[0].user_id)
+        }
+    })
 }))
 
-passport.serializeUser(function (profile, done) {
-    done(null, profile)
+passport.serializeUser((id, done) => {
+    done(null, id)
 })
-passport.deserializeUser(function (profile, done) {
-    done(null, profile)
+passport.deserializeUser((id, done) => {
+    app.get('db').findSessionUser([id]).then(user => {
+        done(null, user[0])
+    })
 })
 
 app.get('/auth', passport.authenticate('auth0'))
 app.get('/auth/callback', passport.authenticate('auth0', {
-    successRedirect: `http://192.168.1.81:3000/#/QA/${currentDay}`
+    successRedirect: REACT_APP_SUCCESS
 }))
-
-
-app.get('/QA/:id', ctrl.getQuestion)
-app.put('/QA/A', ctrl.aVote)
-app.put('/QA/B', ctrl.bVote)
-app.get('/Result/question/:id', ctrl.resultGetQuestion)
-app.get('/Result/percent/:id', ctrl.getPercent)
-app.get('/Result/comments/:id', ctrl.getComments)
-app.post('/Result/postComment/:id', ctrl.addComment)
-
-
-const port = SERVER_PORT
-
-massive(CONNECTION_STRING).then(db => {
-    app.set('db', db);
-    app.listen(port, () => {
-        console.log(`listening on port ${port}`)
-    })
+app.get('/auth/me', (req, res) => {
+    if(req.user) {
+        res.status(200).send(req.user)
+    } else {
+        res.status(401).send('You are unauthorized. Log in.')
+    }
 })
+
+app.get('/api/QA/usercheck', ctrl.userCheck)
+app.get('/api/QA', ctrl.getQuestion)
+app.put('/api/QA/A', ctrl.aVote)
+app.put('/api/QA/B', ctrl.bVote)
+app.get('/api/result/percent/:id', ctrl.getPercent)
+app.get('/api/result/comments/:id', ctrl.getComments)
+app.get('/api/getSessionUser', ctrl.getSessionUser)
+app.post('/api/result/postComment', ctrl.addComment)
+app.put('/api/result/editComment', ctrl.editComment)
+app.put('/api/result/deleteComment/:id', ctrl.deleteComment)
+app.get('/api/result/getSmiles/:id', ctrl.getSmiles)
+app.post('/api/result/addSmile', ctrl.addSmile)
+app.post('/api/result/addFrown', ctrl.addFrown)
+
+
+app.listen(SERVER_PORT, () => console.log(`Hey mang I'm glistening on port ${SERVER_PORT}`))
