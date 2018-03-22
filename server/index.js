@@ -9,6 +9,8 @@ const Auth0Strategy = require('passport-auth0')
 require('dotenv').config()
 
 const {
+    REACT_APP_LOGIN,
+    REACT_APP_SUCCESS,
     SERVER_PORT,
     SESSION_SECRET,
     DOMAIN,
@@ -19,6 +21,8 @@ const {
 } = process.env
 
 const app = express();
+
+app.use(express.static( `${__dirname}/../build` ))
 
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
@@ -66,7 +70,7 @@ passport.deserializeUser((id, done) => {
 
 app.get('/auth', passport.authenticate('auth0'))
 app.get('/auth/callback', passport.authenticate('auth0', {
-    successRedirect: `http://localhost:3000/#/QA`
+    successRedirect: REACT_APP_SUCCESS
 }))
 app.get('/auth/me', (req, res) => {
     if(req.user) {
