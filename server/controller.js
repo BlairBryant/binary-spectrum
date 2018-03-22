@@ -14,7 +14,7 @@ module.exports = {
         let today = date.getDate()
         let month = date.getMonth()
         let year = date.getFullYear()
-        // console.log(year, month, today)
+
         db.getQuestion([year, month, today]).then(question => res.status(200).send(question))
     },
     aVote: (req, res) => {

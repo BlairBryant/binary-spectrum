@@ -10,18 +10,17 @@ class Result extends Component {
         super()
 
         this.state = {
-            questionId: -1
+            questionId: -1,
+            percentShrink: false
         }
+        this.percentShrink = this.percentShrink.bind(this)
     }
 
     componentDidMount() {
-        // get question
-        axios.get(`/QA`).then(res => {
+        axios.get(`/api/QA`).then(res => {
             this.setState({questionId: res.data[0].question_id})
             this.props.readQuestionResult(res.data[0].question)
-            // get percent
-            axios.get(`/result/percent/${this.state.questionId}`).then(res => {
-                // console.log(res.data)
+            axios.get(`/api/result/percent/${this.state.questionId}`).then(res => {
                 if(this.props.match.params.id === 'A') {
                     this.props.readPercent(
                     Math.round(+res.data[0].a_total/(+res.data[0].a_total + +res.data[0].b_total)*100))
@@ -30,11 +29,11 @@ class Result extends Component {
                     Math.round(+res.data[0].b_total/(+res.data[0].a_total + +res.data[0].b_total)*100))
                 }
             })
-            // get comments
-            axios.get(`/result/comments/${this.state.questionId}`).then(res => {
+            window.setTimeout(this.percentShrink, 400)
+            axios.get(`/api/result/comments/${this.state.questionId}`).then(res => {
                 this.props.readComments(res.data)
             })
-            axios.get(`/getSessionUser`).then(res => {
+            axios.get(`/api/getSessionUser`).then(res => {
                 this.props.readUserSession(res.data)
             })
         })
@@ -49,17 +48,26 @@ class Result extends Component {
         }
     }
 
+    percentShrink() {
+        this.setState({percentShrink: true})
+    }
+
     render() {
+        const {percentShrink} = this.state
         let mappedComments = this.props.commentsResult.map((x, i) => {
             return <Comment key={x.comment_id} commentObject={x} />
         })
         return(
             <div className='result'>
+                <div className='colorTop' id='resultColorTop'></div>
+                <div className='colorTop' id='resultColorLeft'></div>
                 {/* <div className='qHolder'>{this.props.questionResult}</div> */}
-                <div className='percentDisplay'>{`${this.props.percentResult}%`}</div>
+                <div className={percentShrink ? 'percentDisplay percentShrink' : 'percentDisplay'}>{`${this.props.percentResult}%`}</div>
+                <h4 id='votedBlurb'>of users voted the same as you</h4>
 
-                <section className='commentsHolder'>Comments Holder <br /><br />
-                    <textarea value={this.props.comment} 
+                <section className='commentsHolder'>
+                    <textarea value={this.props.comment}
+                              className='textInputArea' 
                               placeholder='Leave a comment' 
                               onChange={(e) => this.props.typingComment(e.target.value)}
                               onKeyPress={(e) => this.postComment(e)}

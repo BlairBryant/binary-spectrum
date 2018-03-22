@@ -6,10 +6,11 @@ const ctrl = require('./controller');
 const session = require('express-session')
 const passport = require('passport')
 const Auth0Strategy = require('passport-auth0')
-const checkForSession = require('./middleware/checkForSession')
 require('dotenv').config()
 
 const {
+    REACT_APP_LOGIN,
+    REACT_APP_SUCCESS,
     SERVER_PORT,
     SESSION_SECRET,
     DOMAIN,
@@ -20,6 +21,8 @@ const {
 } = process.env
 
 const app = express();
+
+app.use(express.static( `${__dirname}/../build` ))
 
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
@@ -67,7 +70,7 @@ passport.deserializeUser((id, done) => {
 
 app.get('/auth', passport.authenticate('auth0'))
 app.get('/auth/callback', passport.authenticate('auth0', {
-    successRedirect: `http://192.168.1.81:3000/#/QA`
+    successRedirect: REACT_APP_SUCCESS
 }))
 app.get('/auth/me', (req, res) => {
     if(req.user) {
@@ -77,13 +80,13 @@ app.get('/auth/me', (req, res) => {
     }
 })
 
-app.get('/QA/usercheck', ctrl.userCheck)
-app.get('/QA', ctrl.getQuestion)
-app.put('/QA/A', ctrl.aVote)
-app.put('/QA/B', ctrl.bVote)
-app.get('/result/percent/:id', ctrl.getPercent)
-app.get('/result/comments/:id', ctrl.getComments)
-app.get('/getSessionUser', ctrl.getSessionUser)
+app.get('/api/QA/usercheck', ctrl.userCheck)
+app.get('/api/QA', ctrl.getQuestion)
+app.put('/api/QA/A', ctrl.aVote)
+app.put('/api/QA/B', ctrl.bVote)
+app.get('/api/result/percent/:id', ctrl.getPercent)
+app.get('/api/result/comments/:id', ctrl.getComments)
+app.get('/api/getSessionUser', ctrl.getSessionUser)
 app.post('/api/result/postComment', ctrl.addComment)
 app.put('/api/result/editComment', ctrl.editComment)
 app.put('/api/result/deleteComment/:id', ctrl.deleteComment)

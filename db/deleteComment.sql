@@ -1,3 +1,6 @@
+DELETE FROM smiles
+WHERE comment_id = $1;
+
 DELETE FROM comments
 WHERE comment_id = $1;
 
